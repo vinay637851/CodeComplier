@@ -11,13 +11,8 @@ function Codebase({user}) {
     getWorkspaces()
     async function getWorkspaces(){
       try{
-<<<<<<< HEAD
         let res=await fetch("http://localhost:3000/code/workplace/stroage/get",{
           method:"POST",
-=======
-        let res=await fetch("https://codebyte-51m1.onrender.com/code/workplace/stroage/get",{
-          method:"GET",
->>>>>>> 66beb95 (update)
           headers:{
             "Content-Type":"application/json"
           },
