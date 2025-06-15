@@ -1,0 +1,50 @@
+# Node.js
+node_modules/
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.*.local
+.env.production
+
+# Logs & cache
+*.log
+*.cache
+.cache/
+.vite/
+
+# Build output
+build/
+dist/
+.next/
+.parcel-cache/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Tests
+coverage/
+*.lcov
+
+# Docker
+docker-compose.override.yml
+
+# Firebase
+functions/node_modules/
+
+# 🔐 Sensitive files
+Backend/serviceAccountKey.json
+Frontend/src/firebaseConfig.js
+Backend/serviceAccountKey.json
