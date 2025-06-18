@@ -4,13 +4,13 @@ import "codemirror/theme/dracula.css";
 import "codemirror/addon/edit/closebrackets.js";
 import "codemirror/mode/clike/clike.js";
 import "codemirror/mode/python/python.js";
-import "./App.css";
+import "../App.css";
 import CodeMirror from "codemirror";
 
 import Button from "@mui/material/Button";
 
 import {Link} from "react-router-dom"
-import { Play, Maximize, Minimize,LogOut } from "lucide-react";
+import { Play, Maximize, Minimize,House } from "lucide-react";
 import { useState } from "react";
 import Theme from "./Theme";
 import Language from "./Language";
@@ -49,7 +49,7 @@ function Codebox({code,language}) {
     }
   };
   async function SendMsg() {
-    const res = await fetch("https://codebyte-51m1.onrender.com/code/workplace/compile", {
+    const res = await fetch("http://localhost:3000/code/workplace/compile", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +77,7 @@ function Codebox({code,language}) {
         id="Codebox_editor"
       >
         <div className="bg-gray-900 w-full h-17 px-6 flex justify-between items-center">
-          <Link to="/"><LogOut className="text-gray-400 rotate-180"/></Link>
+          <Link to="/"><House className="text-gray-300"/></Link>
           <span className="flex gap-4">
             <Theme editor={editor} />
             <Language editor={editor} SetLang={SetLang} Lang={Lang} />

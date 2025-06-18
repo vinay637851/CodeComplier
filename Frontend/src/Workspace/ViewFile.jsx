@@ -10,7 +10,7 @@ import "codemirror/mode/python/python.js";
 import CodeMirror from "codemirror";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import Language from "./Language";
+import Language from "../Editor/Language";
 
 function ViewFile({ folder_id, viewFileData,user_uid }) {
   let file_id=viewFileData.id;

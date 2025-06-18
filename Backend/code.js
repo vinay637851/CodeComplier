@@ -121,6 +121,41 @@ router.post("/workplace/stroage/create",async function(req,res){
     }
 })
 
+router.post("/workplace/stroage/edit",async function(req,res){
+    let {folder_id,user_uid,folder_name,folder_description}=req.body;
+    let db=mongoose.connection.db; 
+    let Workspace=db.collection("workspace");
+    let file=await Workspace.findOne({_id:new ObjectId(folder_id)});
+    if(!file){
+        res.send({error:"Workspace not found"});
+        return;
+    }
+    if(file.folder_name===folder_name && file.folder_description===folder_description){
+        res.send({message:"No changes made"});
+        return;
+    }
+    let old_folder_name=file.folder_name+"+"+user_uid;
+    let new_folder_name=folder_name+"+"+user_uid;
+    const { data: files, error } = await supabase
+    .storage
+    .from("workspacefiles")
+    .list(old_folder_name); 
+    if (files.length > 0) {
+        const paths = files.map(file => `${old_folder_name}/${file.name}`);
+        const { error: moveError } = await supabase
+          .storage
+          .from("workspacefiles")
+          .move(paths, new_folder_name);
+        if (moveError) {
+            res.send({error:"Error moving files"});
+            return;
+        }
+    }
+    await Workspace.updateOne({_id:new ObjectId(folder_id)},{$set:{folder_name:folder_name,folder_description:folder_description}});
+    res.send({message:"Workspace updated successfully"});
+    return;
+})
+
 router.delete("/workplace/stroage/delete",async function(req,res){
     let {id,user_id}=req.body;
     let db=mongoose.connection.db; 

@@ -1,4 +1,4 @@
-# CodeByte
+# Code Bit
 
 CodeByte is an online code editor and compiler where you can write and run code directly from your browser. It supports multiple languages like C++, Java, Python, and more. You can also collaborate with others in real-time.
 

@@ -1,13 +1,14 @@
-import CodeEditorTerminal from "./CodeEditorTerminal"
+import CodeEditorTerminal from "./Editor/CodeEditorTerminal"
 import Home from "./Home"
-import Workspace from "./Workspace"
-import FileList from "./FileList"
-import AddFile from "./AddFile"
-import Signup from "./Signup"
-import Login from "./Login"
+import Workspace from "./Workspace/Workspace"
+import FileList from "./Workspace/FileList"
+import AddFile from "./Workspace/AddFile"
+import Signup from "./Authenticate/Signup"
+import Login from "./Authenticate/Login"
+import EditWorkspace from "./Workspace/EditWorkspace" 
 
 import { ref, get, child } from "firebase/database";
-import { auth,database } from "./firebaseConfig";
+import { auth,database } from "./Authenticate/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 
@@ -17,6 +18,7 @@ import { BrowserRouter, Routes, Route,Navigate} from "react-router-dom";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
@@ -43,33 +45,39 @@ function App() {
       } else {
         setUser(null);
       }
+      setLoading(false); 
     });
 
     return () => unsubscribe();
   }, []);
 
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-950">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-lg font-medium text-white">Please Wait Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
 
   return (
-      <BrowserRouter>
-        <Routes>
-
-          <Route path="/" element={<Home user={user}/>}/>
-          <Route path="/login" element={<Login/>}></Route>
-          <Route path="/signup" element={<Signup/>}></Route>
-          <Route path="/code/workplace" element={user?<CodeEditorTerminal/>:<Navigate to="/login"/>} />
-          <Route path="/code/workplace/stroage" element={user?<Workspace user={user}/>:<Navigate to="/login"/>}/>
-          <Route path="/code/workplace/stroage/files/:id/:user_uid" element={user?<FileList/>:<Navigate to="/login"/>}/>
-          <Route path="/code/workplace/stroage/files/:id/:user_uid/add" element={user?<AddFile/>:<Navigate to="/login"/>}/>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/code/workplace" element={<CodeEditorTerminal/>} />
-          <Route path="/code/workplace/stroage" element={<Workspace/>}/>
-          <Route path="/code/workplace/stroage/files/:id" element={<FileList/>}/>
-          <Route path="/code/workplace/stroage/files/:id/add" element={<AddFile/>}/>
-
-        </Routes>
-      </BrowserRouter>   
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home user={user}/>}/>
+        <Route path="/login" element={<Login/>}/>
+        <Route path="/signup" element={<Signup/>}/>
+        <Route path="/code/workplace" element={user ? <CodeEditorTerminal/> : <Navigate to="/login"/>}/>
+        <Route path="/code/workplace/stroage" element={user ? <Workspace user={user}/> : <Navigate to="/login"/>}/>
+        <Route path="/code/workplace/stroage/files/:id/:user_uid" element={user ? <FileList/> : <Navigate to="/login"/>}/>
+        <Route path="/code/workplace/stroage/files/:id/:user_uid/add" element={user ? <AddFile/> : <Navigate to="/login"/>}/>
+        <Route path="/code/workplace/stroage/edit/:id/:user_uid/:folder_name/:description" element={user ? <EditWorkspace/> : <Navigate to="/login"/>}/>
+      </Routes>
+    </BrowserRouter>
+  );
 }
+
 
 export default App

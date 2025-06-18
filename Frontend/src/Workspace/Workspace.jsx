@@ -1,5 +1,5 @@
 import {Link,useNavigate} from "react-router-dom"
-import { LogOut ,Plus,ChevronLeft,FileCode2,Dot,Trash2} from "lucide-react";
+import { House ,Plus,ChevronLeft,FileCode2,Dot,Trash2,Calendar} from "lucide-react";
 import {ToastContainer, toast } from "react-toastify";
 import { useState ,useEffect} from "react";
 
@@ -46,7 +46,7 @@ function Codebase({user}) {
   async function handleForm(e){
     e.preventDefault();
     try{
-      let res=await fetch("https://codebyte-51m1.onrender.com/code/workplace/stroage/create",{
+      let res=await fetch("http://localhost:3000/code/workplace/stroage/create",{
         method:"POST",
         headers:{
           "Content-Type":"application/json"
@@ -77,7 +77,7 @@ function Codebase({user}) {
   async function DeleteWorkspace(id){
     console.log(id)
     try{
-      let res=await fetch("https://codebyte-51m1.onrender.com/code/workplace/stroage/delete",{
+      let res=await fetch("http://localhost:3000/code/workplace/stroage/delete",{
         method:"DELETE",
         headers:{
           "Content-Type":"application/json"
@@ -103,7 +103,7 @@ function Codebase({user}) {
     <div className="w-screen bg-gray-950 min-h-screen h-max flex flex-col">
       <ToastContainer position="top-center" autoClose={2000} theme="dark" />
         <div className="h-[10vh] bg-gray-900 flex justify-between px-10 z-1 items-center sticky top-0">
-            <Link to="/"><LogOut className="text-gray-400 rotate-180"/></Link>
+            <Link to="/"><House className="text-gray-300"/></Link>
             <button id="Show_Button" className="flex gap-1 bg-blue-600 px-2 py-2 rounded-lg text-white text-base hover:bg-blue-700 cursor-pointer" onClick={ShowWorkspaceform}><Plus/> Create Workspace</button>
         </div>
         <div className="h-max relative">
@@ -122,39 +122,68 @@ function Codebase({user}) {
               </form>
             </div>
           </div>
-          <div id="Workspace_place" className="w-screen h-max bg-gray-950 absolute  text-white grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 p-10">
+          <div id="Workspace_place" className="w-screen h-max bg-gray-950 absolute flex gap-10 flex-col  text-white  p-10">
               {arr!=null?(arr.map(function(ele,idx){
-                return <Container key={idx} id={ele._id} title={ele.folder_name} description={ele.folder_description} totalFiles={ele.files?ele.files.length:0}/>
+                return <Container key={idx} id={ele._id} title={ele.folder_name} description={ele.folder_description} folder_date={ele.folder_date} totalFiles={ele.files?ele.files.length:0}/>
               })):null}
           </div>
         </div>
     </div>
   );
-  function Container({id,title,description,totalFiles}){
+  function Container({ id, title, description, totalFiles, folder_date }) {
     const navigate = useNavigate();
+
     function handleCardClick() {
       navigate(`/code/workplace/stroage/files/${id}/${user.uid}`);
     }
+
     function handleDeleteClick(e) {
-      e.preventDefault(); 
+      e.preventDefault();
       e.stopPropagation();
       DeleteWorkspace(id);
     }
-    return(
-      <div onClick={handleCardClick} className="bg-gray-800 flex flex-col gap-3 cursor-pointer  text-white p-3 px-5 rounded-2xl hover:outline-1 hover:outline-blue-700 h-[155px]">
-        <h1 className="text-xl font-semibold flex gap-2  justify-between items-center"><span className="line-clamp-1">{title}</span><Trash2 size={20} onClick={handleDeleteClick} className="text-gray-500 cursor-pointer"/></h1>
-        <p className="text-gray-500 text-lg line-clamp-2">{description}</p>
-        <span className="flex gap-3">
-          <span className="flex gap-1 items-center text-base text-gray-500">
-            <FileCode2 size={15}/> {totalFiles} Files
-          </span>
-          <span className="flex gap-0.5 items-center text-base text-gray-500">
-            <Dot className="text-green-500 " size={20}/>Active
-          </span>
-        </span>
+
+    return (
+      <div
+        onClick={handleCardClick}
+        className="bg-gray-800 hover:bg-gray-700 transition-all duration-200 cursor-pointer text-white p-5 rounded-2xl shadow-sm hover:shadow-lg group flex flex-col justify-between h-40"
+      >
+        <div className="flex justify-between items-center">
+          <h1 className="text-xl font-semibold truncate max-w-[85%] leading-tight">
+            {title}
+          </h1>
+          <Trash2
+            size={20}
+            onClick={handleDeleteClick}
+            className="text-gray-400 hover:text-red-500 transition-colors duration-150"
+          />
+        </div>
+
+        <p className="text-base text-gray-400 line-clamp-2 mr-2 mb-1 leading-snug">
+          {description || <span className="italic text-gray-500">No description</span>}
+        </p>
+
+        <div className="flex justify-between items-end text-sm text-gray-300 leading-none">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1">
+              <FileCode2 size={16} />
+              <span>{totalFiles} File{totalFiles !== 1 ? 's' : ''}</span>
+            </div>
+            <div className="flex items-center gap-1 text-gray-400">
+              <Calendar size={14} />
+              <span>{folder_date}</span>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-1 text-sm">
+            <Dot className="text-green-500" size={18} />
+            <span className="text-green-400 font-semibold">Active</span>
+          </div>
+        </div>
       </div>
-    )
+    );
   }
+
 }
 
 

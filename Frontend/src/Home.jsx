@@ -1,7 +1,7 @@
 import {Terminal,Rocket,Globe,Share2,Cpu,MonitorPlay,Code} from "lucide-react"
 import {Link} from "react-router-dom"
 import { signOut } from "firebase/auth";
-import { auth } from "./firebaseConfig";
+import { auth } from "./Authenticate/firebaseConfig";
 import { useState,useEffect } from "react";
 function Home({user}) {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -72,7 +72,41 @@ function Home({user}) {
               <Container icon={Rocket} title={"CodeBase Integration"} description={"Seamlessly integrate with your code base. Clone, commit, and manage your projects directly from the editor."}/>
             </div>
         </div>
+        {/* Footer */}
+        <div className="w-full bg-gray-950 text-gray-400 py-8 mt-20 px-10">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <h2 className="text-white text-xl font-bold flex items-center gap-2"><Code size={22}/> Code Bit</h2>
+              <p className="mt-2 text-sm text-gray-500">Code smarter. Build faster. Collaborate better — all in one place.</p>
+            </div>
+
+            <div>
+              <h3 className="text-white font-semibold mb-3">Quick Links</h3>
+              <ul className="space-y-2 text-sm">
+                <li><Link to="/" className="hover:text-white">Home</Link></li>
+                <li><Link to="/code/workplace" className="hover:text-white">Editor</Link></li>
+                <li><Link to="/code/workplace/stroage" className="hover:text-white">Workspace</Link></li>
+                {!user && <>
+                  <li><Link to="/login" className="hover:text-white">Login</Link></li>
+                  <li><Link to="/signup" className="hover:text-white">Sign Up</Link></li>
+                </>}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-white font-semibold mb-3">Stay Connected</h3>
+              <p className="text-sm text-gray-500 mb-2">Follow me on social platforms:</p>
+              <div className="flex gap-4">
+                <a href="https://github.com/vinay637851" className="hover:text-white">GitHub</a>
+                <a href="https://www.linkedin.com/in/vinaysharma637851/" className="hover:text-white">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <hr className="my-6 border-gray-700" />
+          <p className="text-center text-xs text-gray-500">@ Code Bit. Created by Vinay Sharma.</p>
+        </div>
     </div>
+    
   )
 }
 
@@ -80,7 +114,7 @@ function Container({icon:Icon,title,description}){
   return(
     <div className="bg-gray-800 flex flex-col gap-3  text-white p-5 rounded-2xl hover:outline-1 hover:outline-blue-600">
       {Icon?<Icon className="text-indigo-500" size={30} />:null}
-      <h1 className="text-2xl font-semibold">{title}</h1>
+      <h1 className="text-xl font-semibold">{title}</h1>
       <p className="text-gray-500 text-lg">{description}</p>
     </div>
   )

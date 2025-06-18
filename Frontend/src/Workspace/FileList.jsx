@@ -1,6 +1,6 @@
 import  { useEffect ,useState} from 'react'
 import {Link,useParams,useNavigate} from 'react-router-dom'
-import { LogOut,ChevronLeft,Trash2,PencilLine,FilePlus,FileText,FileEdit, Code2 } from 'lucide-react'
+import { House,ChevronLeft,Trash2,PencilLine,FilePlus,FileText,FileEdit, Code2 } from 'lucide-react'
 import ViewFile  from "./ViewFile"
 import {ToastContainer, toast } from "react-toastify";
 
@@ -14,7 +14,7 @@ function FileList() {
         date:""
     });
     async function GetFileData(){
-        let res=await fetch(`https://codebyte-51m1.onrender.com/code/workplace/stroage/get/${id}`,{
+        let res=await fetch(`http://localhost:3000/code/workplace/stroage/files/access/${user_uid}/${id}`,{
             method:"GET",
             headers:{
                 "Content-Type":"application/json"
@@ -27,7 +27,7 @@ function FileList() {
     useEffect(()=>{
         GetFileData();
         return;
-    },[id,user_uid]);
+    },[]);
     function showFileData(id,name,date){
         SetviewFileData({
             id:id,
@@ -53,7 +53,7 @@ function FileList() {
         return;
     }
     async function DeleteWorkspace(){
-        let res=await fetch("https://codebyte-51m1.onrender.com/code/workplace/stroage/delete",{
+        let res=await fetch("http://localhost:3000/code/workplace/stroage/delete",{
             method:"DELETE",
             headers:{
             "Content-Type":"application/json"
@@ -75,11 +75,11 @@ function FileList() {
     <div className='w-screen min-h-screen h-max bg-gray-950 flex flex-col'>
         <ToastContainer position="top-center" autoClose={1000} theme="dark" />
         <div className="h-[10vh] bg-gray-900 flex justify-between px-10 z-1 items-center sticky top-0">
-            <Link to="/"><LogOut className="text-gray-400 rotate-180"/></Link>
+            <Link to="/"><House className="text-gray-300"/></Link>
         </div>
         <div className='w-full h-max py-10 flex justify-center items-center text-white'>
             <div className='w-2/3  flex flex-col gap-5'>
-                <Link to="/code/workplace/stroage"><span className='flex gap-1'><ChevronLeft/> Back to Workspace</span></Link>
+                <Link to="/code/workplace/stroage"><span className='flex gap-1 group'><ChevronLeft className='group-hover:-translate-x-2 transition-transform'/> Back to Workspace</span></Link>
                 <div className='w-full  bg-gray-900 rounded-lg'>
                     <div className='h-[20vh] bg-gray-800 flex justify-between border-b-1 border-gray-700 items-center gap-10 px-5 rounded-t-lg'>
                         <span className='flex gap-2 flex-col'>
@@ -88,7 +88,7 @@ function FileList() {
                             <p className='text-gray-600 text-xs'>Created at : {fileData.folder_date}</p>
                         </span>
                         <span className='flex gap-5 text-gray-400'>
-                            <Trash2 onClick={DeleteWorkspace} className='cursor-pointer'/>
+                            <Link to={`/code/workplace/stroage/edit/${id}/${user_uid}/${fileData.folder_name}/${fileData.folder_description||'-'}`}><PencilLine  className='cursor-pointer'/></Link>
                         </span>
                     </div>
                     <div className='flex  w-full'>
