@@ -7,7 +7,7 @@ import { createUserWithEmailAndPassword, GoogleAuthProvider,getAuth, signInWithP
 import { useNavigate ,Link} from "react-router-dom";
 
 
-function Login() {
+function Signup() {
   const navigate = useNavigate();
   async function LoginData(e){
       e.preventDefault()
@@ -133,4 +133,4 @@ function Login() {
   );
 }
 
-export default Login
+export default Signup

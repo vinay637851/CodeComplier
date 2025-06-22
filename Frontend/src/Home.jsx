@@ -1,4 +1,4 @@
-import {Terminal,Rocket,Globe,Share2,Cpu,MonitorPlay,Code} from "lucide-react"
+import {Terminal,Rocket,Globe,Share2,Cpu,MonitorPlay,Code2} from "lucide-react"
 import {Link} from "react-router-dom"
 import { signOut } from "firebase/auth";
 import { auth } from "./Authenticate/firebaseConfig";
@@ -9,12 +9,12 @@ function Home({user}) {
     await signOut(auth);
   };
   useEffect(() => {
-    console.log("User data:", user);
+    
   }, [user]);
   return (
-    <div className="w-screen min-h-screen flex flex-col  bg-gradient-to-b from-gray-800  to-gray-950">
+    <div className="w-screen min-h-screen flex flex-col  bg-gray-950">
         <div className="text-white h-[15vh] flex justify-between items-center px-10">
-            <span className="text-3xl font-extrabold flex gap-2 items-center"><Code size={30}/> Code Bit</span>
+            <span className="text-3xl font-extrabold flex gap-2 items-center"><Code2 className="w-10 h-10 text-blue-400" /><h1 className="text-3xl font-bold text-white">Code Bit</h1></span>
             {user ? (
           <div className="relative">
             <img
@@ -76,8 +76,8 @@ function Home({user}) {
         <div className="w-full bg-gray-950 text-gray-400 py-8 mt-20 px-10">
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-              <h2 className="text-white text-xl font-bold flex items-center gap-2"><Code size={22}/> Code Bit</h2>
-              <p className="mt-2 text-sm text-gray-500">Code smarter. Build faster. Collaborate better — all in one place.</p>
+              <h2 className="text-white text-xl font-bold flex items-center gap-2"><Code2 size={22}/> Code Bit</h2>
+              <p className="mt-2 text-sm text-gray-500">Code Smarter, Build Faster</p>
             </div>
 
             <div>
@@ -112,7 +112,7 @@ function Home({user}) {
 
 function Container({icon:Icon,title,description}){
   return(
-    <div className="bg-gray-800 flex flex-col gap-3  text-white p-5 rounded-2xl hover:outline-1 hover:outline-blue-600">
+    <div className="bg-gray-900 flex flex-col gap-3  text-white p-5 rounded-2xl hover:outline-1 hover:outline-blue-600">
       {Icon?<Icon className="text-indigo-500" size={30} />:null}
       <h1 className="text-xl font-semibold">{title}</h1>
       <p className="text-gray-500 text-lg">{description}</p>

@@ -6,6 +6,8 @@ import AddFile from "./Workspace/AddFile"
 import Signup from "./Authenticate/Signup"
 import Login from "./Authenticate/Login"
 import EditWorkspace from "./Workspace/EditWorkspace" 
+import Room from "./Codeshare/Room"
+import Playground from "./Codeshare/Playground"
 
 import { ref, get, child } from "firebase/database";
 import { auth,database } from "./Authenticate/firebaseConfig";
@@ -15,7 +17,6 @@ import { useEffect, useState } from "react";
 import './App.css'
 
 import { BrowserRouter, Routes, Route,Navigate} from "react-router-dom";
-
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // Add loading state
@@ -69,6 +70,8 @@ function App() {
         <Route path="/" element={<Home user={user}/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/signup" element={<Signup/>}/>
+        <Route path="/room" element={<Room/>}/>
+        <Route path="/room/playground" element={<Playground/>}/>
         <Route path="/code/workplace" element={user ? <CodeEditorTerminal/> : <Navigate to="/login"/>}/>
         <Route path="/code/workplace/stroage" element={user ? <Workspace user={user}/> : <Navigate to="/login"/>}/>
         <Route path="/code/workplace/stroage/files/:id/:user_uid" element={user ? <FileList/> : <Navigate to="/login"/>}/>

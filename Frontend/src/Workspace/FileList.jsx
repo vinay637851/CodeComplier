@@ -74,9 +74,9 @@ function FileList() {
   return (
     <div className='w-screen min-h-screen h-max bg-gray-950 flex flex-col'>
         <ToastContainer position="top-center" autoClose={1000} theme="dark" />
-        <div className="h-[10vh] bg-gray-900 flex justify-between px-10 z-1 items-center sticky top-0">
+        {/* <div className="h-[10vh] bg-gray-900 flex justify-between px-10 z-1 items-center sticky top-0">
             <Link to="/"><House className="text-gray-300"/></Link>
-        </div>
+        </div> */}
         <div className='w-full h-max py-10 flex justify-center items-center text-white'>
             <div className='w-2/3  flex flex-col gap-5'>
                 <Link to="/code/workplace/stroage"><span className='flex gap-1 group'><ChevronLeft className='group-hover:-translate-x-2 transition-transform'/> Back to Workspace</span></Link>
