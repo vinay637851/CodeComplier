@@ -16,7 +16,7 @@ let http=require('http');
 let server=http.createServer(app);
 let io=require('socket.io')(server, {
   cors: {
-    origin:[ "http://localhost:5173", "https://codecomplier-frontend.vercel.app"],  
+    origin:[ "http://localhost:5173", "https://code-complier-git-main-vinay637851s-projects.vercel.app"],  
     methods: ["GET", "POST"]
   }
 });
