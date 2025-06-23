@@ -11,7 +11,7 @@ function Codebase({user}) {
     getWorkspaces()
     async function getWorkspaces(){
       try{
-        let res=await fetch("http://localhost:3000/code/workplace/stroage/get",{
+        let res=await fetch("https://codecomplier-backend.onrender.com/code/workplace/stroage/get",{
           method:"POST",
           headers:{
             "Content-Type":"application/json"
