@@ -57,7 +57,7 @@ function Home({user}) {
             <h1 className="text-white text-5xl font-bold text-center">Code Smarter, Build Faster</h1>
             <p className="text-gray-500 text-lg text-center max-w-xl ">A powerful, cloud-based code editor designed for modern development workflows. Write, collaborate, and Real-time Collaboration.</p>
             <div className="flex gap-3">
-              <Link to="/code/workplace"><span className="flex gap-1 px-4 py-3 bg-blue-500 text-white text-sm rounded-lg cursor-pointer duration-100 hover:bg-blue-600"><Terminal size={20}/> Start Coding Now</span></Link>
+              <Link to="/room"><span className="flex gap-1 px-4 py-3 bg-blue-500 text-white text-sm rounded-lg cursor-pointer duration-100 hover:bg-blue-600"><Terminal size={20}/> Create Playground</span></Link>
               <Link to="/code/workplace/stroage"><span className="flex gap-1 px-4 py-3 bg-gray-700 text-white text-sm rounded-lg cursor-pointer duration-100 hover:bg-gray-800"><Rocket size={20}/> Create Workspace</span></Link>
             </div>
         </div>

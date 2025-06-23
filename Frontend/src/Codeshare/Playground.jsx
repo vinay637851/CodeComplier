@@ -1,76 +1,49 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Editor from "@monaco-editor/react";
+import { io } from "socket.io-client";
+const socket = io("http://localhost:3000");
 
-function CodeEditor() {
+function Playground() {
   const [language, setLanguage] = useState("java");
-  const [code, setCode] = useState("// Write your code here");
-  const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
+  const [code, setCode] = useState("");
 
-  function handleRun() {
-    // Just a placeholder output
-    setOutput(`Language: ${language}\n\nCode:\n${code}\n\nInput:\n${input}`);
+  function handleCode(value){
+    socket.emit("send_message", value);
   }
 
+  useEffect(() => {
+    socket.on("receive_message", (data) => {
+      setCode(data);
+    }); 
+  })
+
   return (
-    <div style={{ padding: "10px", fontFamily: "sans-serif" }}>
-      <select
-        value={language}
-        onChange={(e) => setLanguage(e.target.value)}
-        style={{ marginBottom: "10px", padding: "6px" }}
-      >
-        <option value="java">Java</option>
-        <option value="cpp">C++</option>
-        <option value="python">Python</option>
-      </select>
-
-      <Editor
-        height="300px"
-        theme="hc-black"
-        language={language}
-        value={code}
-        onChange={(value) => setCode(value)}
-      />
-
-      <textarea
-        placeholder="Input"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        style={{
-          width: "100%",
-          height: "80px",
-          marginTop: "10px",
-          padding: "8px",
-          fontFamily: "monospace",
-        }}
-      />
-
-      <button
-        onClick={handleRun}
-        style={{
-          marginTop: "10px",
-          padding: "10px 20px",
-          background: "black",
-          color: "white",
-          border: "1px solid white",
-        }}
-      >
-        Run (Mock)
-      </button>
-
-      <pre
-        style={{
-          background: "#000",
-          color: "#fff",
-          padding: "10px",
-          marginTop: "10px",
-          minHeight: "100px",
-        }}
-      >
-        {output}
-      </pre>
+    <div className="bg-gray-800 h-screen flex flex-col text-white">
+      <div className=" border-b border-gray-700 flex justify-center items-center">
+        <select
+          value={language}
+          onChange={(e) => setLanguage(e.target.value)}
+          className="bg-gray-700  rounded px-4 py-2 focus:outline-none"
+        >
+          <option value="java">Java</option>
+          <option value="cpp">C++</option>
+          <option value="python">Python</option>
+        </select>
+      </div>
+      <div className="flex-1">
+        <Editor
+          onChange={handleCode}
+          height="100%"
+          theme="vs-dark"
+          value={code}
+          language={language}
+        />
+      </div>
+      <div className="mb-1 border-t border-gray-600 ">
+        hello
+      </div>
     </div>
   );
 }
 
-export default CodeEditor;
+export default Playground;

@@ -1,5 +1,11 @@
 import { Code2, Users, Share2, Play, Zap } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 function Room(){
+    let navigate = useNavigate();
+    function handleRoomDetails(e){
+        e.preventDefault();
+        navigate("/room/playground");
+    }
     return (
         <div className="min-h-screen bg-gradient-to-br bg-gray-950">
             <div className="container mx-auto px-4 py-8">
@@ -24,7 +30,7 @@ function Room(){
                     <h2 className="text-2xl font-bold text-white">Create Room</h2>
                     </div>
                     
-                    <form  className="space-y-4">
+                    <form onSubmit={handleRoomDetails} className="space-y-4">
                     <div>
                         <label htmlFor="roomName" className="block text-sm font-medium text-gray-300 mb-2">
                         Room Name

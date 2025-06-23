@@ -1,5 +1,5 @@
 import {Link,useNavigate} from "react-router-dom"
-import { House ,Plus,ChevronLeft,FileCode2,Dot,Trash2,Calendar} from "lucide-react";
+import { House ,Plus,ChevronLeft,FileCode2,Dot,Trash2,Calendar,Code2} from "lucide-react";
 import {ToastContainer, toast } from "react-toastify";
 import { useState ,useEffect} from "react";
 
@@ -104,7 +104,10 @@ function Codebase({user}) {
       <ToastContainer position="top-center" autoClose={2000} theme="dark" />
         <div className="h-[10vh] bg-gray-900 flex justify-between px-10 z-1 items-center sticky top-0">
             <Link to="/"><House className="text-gray-300"/></Link>
-            <button id="Show_Button" className="flex gap-1 bg-blue-600 px-2 py-2 rounded-lg text-white text-base hover:bg-blue-700 cursor-pointer" onClick={ShowWorkspaceform}><Plus/> Create Workspace</button>
+            <div className="flex gap-3 items-center">
+              <Link to="/code/workplace"><span className="flex gap-1 px-4 py-3 bg-gray-950 text-white text-sm rounded-lg cursor-pointer duration-100 hover:bg-gray-800"><Code2 size={20}/> Create Playground</span></Link>
+              <button id="Show_Button" className="flex gap-1 bg-blue-600 px-2 py-2 rounded-lg text-white text-base hover:bg-blue-700 cursor-pointer" onClick={ShowWorkspaceform}><Plus/> Create Workspace</button>
+            </div>
         </div>
         <div className="h-max relative">
           <div id="Workspace_form" className="bg-gray-950 w-screen h-[90vh] hidden absolute justify-center  items-center text-white">
