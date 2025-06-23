@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import Editor from "@monaco-editor/react";
 import { io } from "socket.io-client";
-const socket = io("http://localhost:3000");
+const socket = io("https://codecomplier-backend.onrender.com");
 
 function Playground() {
   const [language, setLanguage] = useState("java");
