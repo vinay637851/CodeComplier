@@ -52,16 +52,16 @@ function App() {
     return () => unsubscribe();
   }, []);
 
-  // if (loading) {
-  //   return (
-  //     <div className="flex items-center justify-center min-h-screen bg-gray-950">
-  //       <div className="flex flex-col items-center gap-4">
-  //         <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
-  //         <p className="text-lg font-medium text-white">Please Wait Loading...</p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-950">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-lg font-medium text-white">Please Wait Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
 
   return (

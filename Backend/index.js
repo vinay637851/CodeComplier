@@ -10,8 +10,7 @@ let mongoose=require("./database.js")
 const { ObjectId } = require('mongodb'); 
 const fileUpload = require('express-fileupload'); 
 
-const admin = require('firebase-admin');
-const serviceAccount = require('./serviceAccountKey.json');
+
 
 let http=require('http');
 let server=http.createServer(app);
@@ -22,9 +21,6 @@ let io=require('socket.io')(server, {
   }
 });
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
 
 app.use(cors());
 app.use("/codemirror-5.65.19",express.static("C:/Users/KK/Desktop/MERN code editor/code_editor_project/Backend/node_modules/codemirror"))
