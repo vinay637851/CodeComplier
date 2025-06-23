@@ -27,7 +27,7 @@ function FileList() {
     useEffect(()=>{
         GetFileData();
         return;
-    },[]);
+    });
     function showFileData(id,name,date){
         SetviewFileData({
             id:id,
