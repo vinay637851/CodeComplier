@@ -33,7 +33,7 @@ function ViewFile({ folder_id, viewFileData,user_uid }) {
 
   async function accessFileData() {
     let res = await fetch(
-      `http://localhost:3000/code/workplace/stroage/files/data/${user_uid}/${folder_id}/${file_id}`,
+      `https://codecomplier-backend.onrender.com/code/workplace/stroage/files/data/${user_uid}/${folder_id}/${file_id}`,
       {
         method: "GET",
       }
@@ -62,7 +62,7 @@ function ViewFile({ folder_id, viewFileData,user_uid }) {
       editorExist = false;
       SeteditorExist(false);
       let res = await fetch(
-        `http://localhost:3000/code/workplace/stroage/files/data/${user_uid}/${folder_id}/${file_id}`,
+        `https://codecomplier-backend.onrender.com/code/workplace/stroage/files/data/${user_uid}/${folder_id}/${file_id}`,
         {
           method: "GET",
         }
@@ -74,7 +74,7 @@ function ViewFile({ folder_id, viewFileData,user_uid }) {
       Seteditor(editor);
     } else {
       let res = await fetch(
-        `http://localhost:3000/code/workplace/stroage/files/data/upload/${user_uid}/${folder_id}/${file_id}`,
+        `https://codecomplier-backend.onrender.com/code/workplace/stroage/files/data/upload/${user_uid}/${folder_id}/${file_id}`,
         {
           method: "POST",
           headers: {

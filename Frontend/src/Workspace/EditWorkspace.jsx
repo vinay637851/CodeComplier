@@ -13,7 +13,7 @@ function EditWorkspace() {
         e.preventDefault();
         let folder_name=e.target.folder_name.value;
         let folder_description=e.target.folder_description.value;
-        let res=await fetch("http://localhost:3000/code/workplace/stroage/edit",{
+        let res=await fetch("https://codecomplier-backend.onrender.com/code/workplace/stroage/edit",{
             method:"POST",
             headers:{
                 "Content-Type":"application/json"

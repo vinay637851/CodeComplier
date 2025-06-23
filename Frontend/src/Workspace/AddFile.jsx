@@ -9,7 +9,7 @@ function AddFile() {
     const navigate = useNavigate();
     async function handleForm(e) {
         e.preventDefault();
-        let res=await fetch(`http://localhost:3000/code/workplace/stroage/files/create/${user_uid}/${id}`, {
+        let res=await fetch(`https://codecomplier-backend.onrender.com/code/workplace/stroage/files/create/${user_uid}/${id}`, {
             method:"POST",
             headers:{
                 "Content-Type":"application/json"
