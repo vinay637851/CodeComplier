@@ -1,14 +1,11 @@
 import { Code2, Users, Share2, Play, Zap } from 'lucide-react';
-import { useNavigate ,useEffect} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 function Room(){
     let navigate = useNavigate();
     function handleRoomDetails(e){
         e.preventDefault();
         navigate("/room/playground");
     }
-    useEffect(() => {
-        
-      });
     return (
         <div className="min-h-screen bg-gradient-to-br bg-gray-950">
             <div className="container mx-auto px-4 py-8">
